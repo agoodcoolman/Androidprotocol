@@ -3,7 +3,7 @@
 
 ["服务端代码"](https://github.com/agoodcoolman/Auth2)
 
-1.此项目中使用的相关资源均上传在项目下的 protocol resasource 文件中.便于下载使用.
+1.此项目中使用的相关资源均上传在项目下的 protoc.exe  .便于下载使用.
 
 
 2.每个项目应用protocol协议的时候,需要引用的jar包在项目的libs目录下,是自己编译的.不记得版本了.
