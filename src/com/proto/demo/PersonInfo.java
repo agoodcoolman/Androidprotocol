@@ -13,25 +13,65 @@ public final class PersonInfo {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required uint32 id = 1;</code>
-     *
-     * <pre>
-     *optional string name = 2;
-     *optional string email = 3;
-     *optional repeated Facephoto = 4;
-     * </pre>
+     * <code>required int32 id = 1;</code>
      */
     boolean hasId();
     /**
-     * <code>required uint32 id = 1;</code>
-     *
-     * <pre>
-     *optional string name = 2;
-     *optional string email = 3;
-     *optional repeated Facephoto = 4;
-     * </pre>
+     * <code>required int32 id = 1;</code>
      */
     int getId();
+
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    boolean hasEmail();
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    java.lang.String getEmail();
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getEmailBytes();
+
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    java.util.List<com.proto.demo.PersonInfo.Facephoto> 
+        getPhotoList();
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    com.proto.demo.PersonInfo.Facephoto getPhoto(int index);
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    int getPhotoCount();
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    java.util.List<? extends com.proto.demo.PersonInfo.FacephotoOrBuilder> 
+        getPhotoOrBuilderList();
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    com.proto.demo.PersonInfo.FacephotoOrBuilder getPhotoOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code tutorial.Person}
@@ -87,7 +127,27 @@ public final class PersonInfo {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              id_ = input.readUInt32();
+              id_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              email_ = bs;
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                photo_ = new java.util.ArrayList<com.proto.demo.PersonInfo.Facephoto>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              photo_.add(input.readMessage(com.proto.demo.PersonInfo.Facephoto.PARSER, extensionRegistry));
               break;
             }
           }
@@ -98,6 +158,9 @@ public final class PersonInfo {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          photo_ = java.util.Collections.unmodifiableList(photo_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -133,32 +196,142 @@ public final class PersonInfo {
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     /**
-     * <code>required uint32 id = 1;</code>
-     *
-     * <pre>
-     *optional string name = 2;
-     *optional string email = 3;
-     *optional repeated Facephoto = 4;
-     * </pre>
+     * <code>required int32 id = 1;</code>
      */
     public boolean hasId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required uint32 id = 1;</code>
-     *
-     * <pre>
-     *optional string name = 2;
-     *optional string email = 3;
-     *optional repeated Facephoto = 4;
-     * </pre>
+     * <code>required int32 id = 1;</code>
      */
     public int getId() {
       return id_;
     }
 
+    public static final int NAME_FIELD_NUMBER = 2;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int EMAIL_FIELD_NUMBER = 3;
+    private java.lang.Object email_;
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public boolean hasEmail() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public java.lang.String getEmail() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          email_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string email = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getEmailBytes() {
+      java.lang.Object ref = email_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        email_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PHOTO_FIELD_NUMBER = 4;
+    private java.util.List<com.proto.demo.PersonInfo.Facephoto> photo_;
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    public java.util.List<com.proto.demo.PersonInfo.Facephoto> getPhotoList() {
+      return photo_;
+    }
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    public java.util.List<? extends com.proto.demo.PersonInfo.FacephotoOrBuilder> 
+        getPhotoOrBuilderList() {
+      return photo_;
+    }
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    public int getPhotoCount() {
+      return photo_.size();
+    }
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    public com.proto.demo.PersonInfo.Facephoto getPhoto(int index) {
+      return photo_.get(index);
+    }
+    /**
+     * <code>repeated .tutorial.Facephoto photo = 4;</code>
+     */
+    public com.proto.demo.PersonInfo.FacephotoOrBuilder getPhotoOrBuilder(
+        int index) {
+      return photo_.get(index);
+    }
+
     private void initFields() {
       id_ = 0;
+      name_ = "";
+      email_ = "";
+      photo_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -170,6 +343,12 @@ public final class PersonInfo {
         memoizedIsInitialized = 0;
         return false;
       }
+      for (int i = 0; i < getPhotoCount(); i++) {
+        if (!getPhoto(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -178,7 +357,16 @@ public final class PersonInfo {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, id_);
+        output.writeInt32(1, id_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getEmailBytes());
+      }
+      for (int i = 0; i < photo_.size(); i++) {
+        output.writeMessage(4, photo_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -191,7 +379,19 @@ public final class PersonInfo {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, id_);
+          .computeInt32Size(1, id_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getEmailBytes());
+      }
+      for (int i = 0; i < photo_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, photo_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -302,6 +502,7 @@ public final class PersonInfo {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPhotoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -312,6 +513,16 @@ public final class PersonInfo {
         super.clear();
         id_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        email_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (photoBuilder_ == null) {
+          photo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          photoBuilder_.clear();
+        }
         return this;
       }
 
@@ -344,6 +555,23 @@ public final class PersonInfo {
           to_bitField0_ |= 0x00000001;
         }
         result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.email_ = email_;
+        if (photoBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            photo_ = java.util.Collections.unmodifiableList(photo_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.photo_ = photo_;
+        } else {
+          result.photo_ = photoBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -363,6 +591,42 @@ public final class PersonInfo {
         if (other.hasId()) {
           setId(other.getId());
         }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasEmail()) {
+          bitField0_ |= 0x00000004;
+          email_ = other.email_;
+          onChanged();
+        }
+        if (photoBuilder_ == null) {
+          if (!other.photo_.isEmpty()) {
+            if (photo_.isEmpty()) {
+              photo_ = other.photo_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensurePhotoIsMutable();
+              photo_.addAll(other.photo_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.photo_.isEmpty()) {
+            if (photoBuilder_.isEmpty()) {
+              photoBuilder_.dispose();
+              photoBuilder_ = null;
+              photo_ = other.photo_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              photoBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getPhotoFieldBuilder() : null;
+            } else {
+              photoBuilder_.addAllMessages(other.photo_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -371,6 +635,12 @@ public final class PersonInfo {
         if (!hasId()) {
           
           return false;
+        }
+        for (int i = 0; i < getPhotoCount(); i++) {
+          if (!getPhoto(i).isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -396,37 +666,19 @@ public final class PersonInfo {
 
       private int id_ ;
       /**
-       * <code>required uint32 id = 1;</code>
-       *
-       * <pre>
-       *optional string name = 2;
-       *optional string email = 3;
-       *optional repeated Facephoto = 4;
-       * </pre>
+       * <code>required int32 id = 1;</code>
        */
       public boolean hasId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required uint32 id = 1;</code>
-       *
-       * <pre>
-       *optional string name = 2;
-       *optional string email = 3;
-       *optional repeated Facephoto = 4;
-       * </pre>
+       * <code>required int32 id = 1;</code>
        */
       public int getId() {
         return id_;
       }
       /**
-       * <code>required uint32 id = 1;</code>
-       *
-       * <pre>
-       *optional string name = 2;
-       *optional string email = 3;
-       *optional repeated Facephoto = 4;
-       * </pre>
+       * <code>required int32 id = 1;</code>
        */
       public Builder setId(int value) {
         bitField0_ |= 0x00000001;
@@ -435,19 +687,405 @@ public final class PersonInfo {
         return this;
       }
       /**
-       * <code>required uint32 id = 1;</code>
-       *
-       * <pre>
-       *optional string name = 2;
-       *optional string email = 3;
-       *optional repeated Facephoto = 4;
-       * </pre>
+       * <code>required int32 id = 1;</code>
        */
       public Builder clearId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         id_ = 0;
         onChanged();
         return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object email_ = "";
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public boolean hasEmail() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public java.lang.String getEmail() {
+        java.lang.Object ref = email_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            email_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getEmailBytes() {
+        java.lang.Object ref = email_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          email_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public Builder setEmail(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        email_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public Builder clearEmail() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        email_ = getDefaultInstance().getEmail();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string email = 3;</code>
+       */
+      public Builder setEmailBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        email_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.proto.demo.PersonInfo.Facephoto> photo_ =
+        java.util.Collections.emptyList();
+      private void ensurePhotoIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          photo_ = new java.util.ArrayList<com.proto.demo.PersonInfo.Facephoto>(photo_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.proto.demo.PersonInfo.Facephoto, com.proto.demo.PersonInfo.Facephoto.Builder, com.proto.demo.PersonInfo.FacephotoOrBuilder> photoBuilder_;
+
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public java.util.List<com.proto.demo.PersonInfo.Facephoto> getPhotoList() {
+        if (photoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(photo_);
+        } else {
+          return photoBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public int getPhotoCount() {
+        if (photoBuilder_ == null) {
+          return photo_.size();
+        } else {
+          return photoBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public com.proto.demo.PersonInfo.Facephoto getPhoto(int index) {
+        if (photoBuilder_ == null) {
+          return photo_.get(index);
+        } else {
+          return photoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder setPhoto(
+          int index, com.proto.demo.PersonInfo.Facephoto value) {
+        if (photoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePhotoIsMutable();
+          photo_.set(index, value);
+          onChanged();
+        } else {
+          photoBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder setPhoto(
+          int index, com.proto.demo.PersonInfo.Facephoto.Builder builderForValue) {
+        if (photoBuilder_ == null) {
+          ensurePhotoIsMutable();
+          photo_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          photoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder addPhoto(com.proto.demo.PersonInfo.Facephoto value) {
+        if (photoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePhotoIsMutable();
+          photo_.add(value);
+          onChanged();
+        } else {
+          photoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder addPhoto(
+          int index, com.proto.demo.PersonInfo.Facephoto value) {
+        if (photoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePhotoIsMutable();
+          photo_.add(index, value);
+          onChanged();
+        } else {
+          photoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder addPhoto(
+          com.proto.demo.PersonInfo.Facephoto.Builder builderForValue) {
+        if (photoBuilder_ == null) {
+          ensurePhotoIsMutable();
+          photo_.add(builderForValue.build());
+          onChanged();
+        } else {
+          photoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder addPhoto(
+          int index, com.proto.demo.PersonInfo.Facephoto.Builder builderForValue) {
+        if (photoBuilder_ == null) {
+          ensurePhotoIsMutable();
+          photo_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          photoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder addAllPhoto(
+          java.lang.Iterable<? extends com.proto.demo.PersonInfo.Facephoto> values) {
+        if (photoBuilder_ == null) {
+          ensurePhotoIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, photo_);
+          onChanged();
+        } else {
+          photoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder clearPhoto() {
+        if (photoBuilder_ == null) {
+          photo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          photoBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public Builder removePhoto(int index) {
+        if (photoBuilder_ == null) {
+          ensurePhotoIsMutable();
+          photo_.remove(index);
+          onChanged();
+        } else {
+          photoBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public com.proto.demo.PersonInfo.Facephoto.Builder getPhotoBuilder(
+          int index) {
+        return getPhotoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public com.proto.demo.PersonInfo.FacephotoOrBuilder getPhotoOrBuilder(
+          int index) {
+        if (photoBuilder_ == null) {
+          return photo_.get(index);  } else {
+          return photoBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public java.util.List<? extends com.proto.demo.PersonInfo.FacephotoOrBuilder> 
+           getPhotoOrBuilderList() {
+        if (photoBuilder_ != null) {
+          return photoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(photo_);
+        }
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public com.proto.demo.PersonInfo.Facephoto.Builder addPhotoBuilder() {
+        return getPhotoFieldBuilder().addBuilder(
+            com.proto.demo.PersonInfo.Facephoto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public com.proto.demo.PersonInfo.Facephoto.Builder addPhotoBuilder(
+          int index) {
+        return getPhotoFieldBuilder().addBuilder(
+            index, com.proto.demo.PersonInfo.Facephoto.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .tutorial.Facephoto photo = 4;</code>
+       */
+      public java.util.List<com.proto.demo.PersonInfo.Facephoto.Builder> 
+           getPhotoBuilderList() {
+        return getPhotoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.proto.demo.PersonInfo.Facephoto, com.proto.demo.PersonInfo.Facephoto.Builder, com.proto.demo.PersonInfo.FacephotoOrBuilder> 
+          getPhotoFieldBuilder() {
+        if (photoBuilder_ == null) {
+          photoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.proto.demo.PersonInfo.Facephoto, com.proto.demo.PersonInfo.Facephoto.Builder, com.proto.demo.PersonInfo.FacephotoOrBuilder>(
+                  photo_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          photo_ = null;
+        }
+        return photoBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:tutorial.Person)
@@ -1053,10 +1691,11 @@ public final class PersonInfo {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014person.proto\022\010tutorial\"\024\n\006Person\022\n\n\002id" +
-      "\030\001 \002(\r\",\n\tFacephoto\022\020\n\010describe\030\001 \002(\t\022\r\n" +
-      "\005photo\030\002 \002(\014B\034\n\016com.proto.demoB\nPersonIn" +
-      "fo"
+      "\n\014person.proto\022\010tutorial\"U\n\006Person\022\n\n\002id" +
+      "\030\001 \002(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005email\030\003 \001(\t\022\"\n\005p" +
+      "hoto\030\004 \003(\0132\023.tutorial.Facephoto\",\n\tFacep" +
+      "hoto\022\020\n\010describe\030\001 \002(\t\022\r\n\005photo\030\002 \002(\014B\034\n" +
+      "\016com.proto.demoB\nPersonInfo"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1075,7 +1714,7 @@ public final class PersonInfo {
     internal_static_tutorial_Person_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_tutorial_Person_descriptor,
-        new java.lang.String[] { "Id", });
+        new java.lang.String[] { "Id", "Name", "Email", "Photo", });
     internal_static_tutorial_Facephoto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_tutorial_Facephoto_fieldAccessorTable = new

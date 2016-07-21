@@ -1,8 +1,8 @@
 package tutorial;
 
 option java_package = "com.example.tutorial";
-option java_outer_classname = "AddressBookProtos";
-
+option java_outer_classname = "AddressBookProtos"; // 这个是生成的类名
+// message 就是生成的类里面的类名,相当于javabean的类名~
 message Person {
   required string name = 1;
   required int32 id = 2;

@@ -2,6 +2,8 @@ package com.example.protocoltest;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,6 +12,8 @@ import com.example.tutorial.AddressBookProtos;
 import com.example.tutorial.AddressBookProtos.AddressBook;
 import com.example.tutorial.AddressBookProtos.AddressBook.Builder;
 import com.example.tutorial.AddressBookProtos.Person;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -25,6 +29,9 @@ import com.lidroid.xutils.http.client.multipart.content.ByteArrayBody;
 import com.lidroid.xutils.http.client.multipart.content.ContentBody;
 import com.lidroid.xutils.http.client.multipart.content.FileBody;
 import com.lidroid.xutils.util.MimeTypeUtils;
+import com.proto.demo.PersonInfo;
+import com.proto.demo.PersonInfo.Facephoto;
+import com.proto.demo.Result.result;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -48,11 +55,30 @@ public class MainActivity extends ActionBarActivity {
 		.setName("whta")
 		.build();
 		
-		AddressBook addressBook = AddressBook.newBuilder().addPerson(person).build();
+//		AddressBook addressBook = AddressBook.newBuilder().addPerson(person).build();
+		com.proto.demo.PersonInfo.Person personinfo = null;
+		
+		String filePath = Environment.getExternalStorageDirectory().getAbsoluteFile().toString()+"/AndroidWT/face/face.jpg";
+		FileInputStream fileInputStream;
+		
+		try {
+			if (new File(filePath).exists()) {
+				fileInputStream = new FileInputStream(filePath);
+				com.proto.demo.PersonInfo.Facephoto.Builder mergeFrom = Facephoto.newBuilder().setPhoto(ByteString.readFrom(fileInputStream)).setDescribe("棒棒的");
+				
+				personinfo = PersonInfo.Person.newBuilder().setId(1).addPhoto(mergeFrom).build();
+				
+				int id = personinfo.getId();
+				
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
-		String externalStorageDirectory = Environment.getExternalStorageDirectory().getAbsoluteFile().toString()+"/for";
-		File file = new File(externalStorageDirectory);
+		
 		
 		/*if(!file.exists()) {
 			file.mkdirs();
@@ -74,21 +100,31 @@ public class MainActivity extends ActionBarActivity {
 		MultipartEntity multipartEntity = new MultipartEntity();
 		
 //		FileBody fileBody = new FileBody(file2);
-		byte[] byteArray = addressBook.toByteArray();
+		byte[] byteArray = personinfo.toByteArray();
 		ByteArrayBody byteArrayBody = new ByteArrayBody(byteArray, "file");
 //		multipartEntity.addPart("file", fileBody);
 		multipartEntity.addPart("file", byteArrayBody);
 		requestParams.setBodyEntity(multipartEntity);
 		httpUtils.send(HttpMethod.POST, "http://192.168.1.5:8080/Auth2/protobuf.do?", requestParams, new RequestCallBack<String>() {
 
-			@Override
-			public void onFailure(HttpException arg0, String result) {
-				System.out.println(result);
-			}
 
 			@Override
 			public void onSuccess(ResponseInfo<String> arg0) {
-				System.out.println(arg0.toString());
+				try {
+					String results= arg0.result;
+					result parseFrom = result.parseFrom(results.getBytes());
+					System.out.println(parseFrom.toString());
+				} catch (InvalidProtocolBufferException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+
+			@Override
+			public void onFailure(HttpException arg0, String arg1) {
+				
+				
 			}
 		});
 	}

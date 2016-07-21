@@ -13,7 +13,7 @@ public final class Result {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required uint64 resultcode = 1;</code>
+     * <code>required int64 resultcode = 1;</code>
      *
      * <pre>
      * ½á¹ûÂð
@@ -21,7 +21,7 @@ public final class Result {
      */
     boolean hasResultcode();
     /**
-     * <code>required uint64 resultcode = 1;</code>
+     * <code>required int64 resultcode = 1;</code>
      *
      * <pre>
      * ½á¹ûÂð
@@ -56,7 +56,7 @@ public final class Result {
         getAlertMessageBytes();
 
     /**
-     * <code>optional uint64 errorCode = 3;</code>
+     * <code>optional int64 errorCode = 3;</code>
      *
      * <pre>
      * ´íÎóÂð
@@ -64,7 +64,7 @@ public final class Result {
      */
     boolean hasErrorCode();
     /**
-     * <code>optional uint64 errorCode = 3;</code>
+     * <code>optional int64 errorCode = 3;</code>
      *
      * <pre>
      * ´íÎóÂð
@@ -178,7 +178,7 @@ public final class Result {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              resultcode_ = input.readUInt64();
+              resultcode_ = input.readInt64();
               break;
             }
             case 18: {
@@ -189,7 +189,7 @@ public final class Result {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              errorCode_ = input.readUInt64();
+              errorCode_ = input.readInt64();
               break;
             }
             case 34: {
@@ -247,7 +247,7 @@ public final class Result {
     public static final int RESULTCODE_FIELD_NUMBER = 1;
     private long resultcode_;
     /**
-     * <code>required uint64 resultcode = 1;</code>
+     * <code>required int64 resultcode = 1;</code>
      *
      * <pre>
      * ½á¹ûÂð
@@ -257,7 +257,7 @@ public final class Result {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required uint64 resultcode = 1;</code>
+     * <code>required int64 resultcode = 1;</code>
      *
      * <pre>
      * ½á¹ûÂð
@@ -324,7 +324,7 @@ public final class Result {
     public static final int ERRORCODE_FIELD_NUMBER = 3;
     private long errorCode_;
     /**
-     * <code>optional uint64 errorCode = 3;</code>
+     * <code>optional int64 errorCode = 3;</code>
      *
      * <pre>
      * ´íÎóÂð
@@ -334,7 +334,7 @@ public final class Result {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional uint64 errorCode = 3;</code>
+     * <code>optional int64 errorCode = 3;</code>
      *
      * <pre>
      * ´íÎóÂð
@@ -477,13 +477,13 @@ public final class Result {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt64(1, resultcode_);
+        output.writeInt64(1, resultcode_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getAlertMessageBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt64(3, errorCode_);
+        output.writeInt64(3, errorCode_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getErrorMessageBytes());
@@ -502,7 +502,7 @@ public final class Result {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(1, resultcode_);
+          .computeInt64Size(1, resultcode_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -510,7 +510,7 @@ public final class Result {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(3, errorCode_);
+          .computeInt64Size(3, errorCode_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
@@ -765,7 +765,7 @@ public final class Result {
 
       private long resultcode_ ;
       /**
-       * <code>required uint64 resultcode = 1;</code>
+       * <code>required int64 resultcode = 1;</code>
        *
        * <pre>
        * ½á¹ûÂð
@@ -775,7 +775,7 @@ public final class Result {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required uint64 resultcode = 1;</code>
+       * <code>required int64 resultcode = 1;</code>
        *
        * <pre>
        * ½á¹ûÂð
@@ -785,7 +785,7 @@ public final class Result {
         return resultcode_;
       }
       /**
-       * <code>required uint64 resultcode = 1;</code>
+       * <code>required int64 resultcode = 1;</code>
        *
        * <pre>
        * ½á¹ûÂð
@@ -798,7 +798,7 @@ public final class Result {
         return this;
       }
       /**
-       * <code>required uint64 resultcode = 1;</code>
+       * <code>required int64 resultcode = 1;</code>
        *
        * <pre>
        * ½á¹ûÂð
@@ -913,7 +913,7 @@ public final class Result {
 
       private long errorCode_ ;
       /**
-       * <code>optional uint64 errorCode = 3;</code>
+       * <code>optional int64 errorCode = 3;</code>
        *
        * <pre>
        * ´íÎóÂð
@@ -923,7 +923,7 @@ public final class Result {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional uint64 errorCode = 3;</code>
+       * <code>optional int64 errorCode = 3;</code>
        *
        * <pre>
        * ´íÎóÂð
@@ -933,7 +933,7 @@ public final class Result {
         return errorCode_;
       }
       /**
-       * <code>optional uint64 errorCode = 3;</code>
+       * <code>optional int64 errorCode = 3;</code>
        *
        * <pre>
        * ´íÎóÂð
@@ -946,7 +946,7 @@ public final class Result {
         return this;
       }
       /**
-       * <code>optional uint64 errorCode = 3;</code>
+       * <code>optional int64 errorCode = 3;</code>
        *
        * <pre>
        * ´íÎóÂð
@@ -1185,8 +1185,8 @@ public final class Result {
   static {
     java.lang.String[] descriptorData = {
       "\n\014result.proto\022\010tutorial\"m\n\006result\022\022\n\nre" +
-      "sultcode\030\001 \002(\004\022\024\n\014alertMessage\030\002 \001(\t\022\021\n\t" +
-      "errorCode\030\003 \001(\004\022\024\n\014errorMessage\030\004 \001(\t\022\020\n" +
+      "sultcode\030\001 \002(\003\022\024\n\014alertMessage\030\002 \001(\t\022\021\n\t" +
+      "errorCode\030\003 \001(\003\022\024\n\014errorMessage\030\004 \001(\t\022\020\n" +
       "\010jsonInfo\030\005 \001(\tB\030\n\016com.proto.demoB\006Resul" +
       "t"
     };
