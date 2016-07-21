@@ -53,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		String externalStorageDirectory = Environment.getExternalStorageDirectory().getAbsoluteFile().toString()+"/for";
 		File file = new File(externalStorageDirectory);
-		//
+		
 		/*if(!file.exists()) {
 			file.mkdirs();
 		}
