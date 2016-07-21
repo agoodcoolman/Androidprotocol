@@ -10,11 +10,29 @@
 
 3.[protocol协议的编写的指导 英文版](https://developers.google.com/protocol-buffers/docs/proto3)
 
+4.生成对应的java文件
 
-4. 生成对应的java文件
+
 
     上面的是根据proto文件生成java文件.
-    protoc –java_out=../ –proto_path= .\addressbook.proto
 
-1,其中–java_out=../ 表示输出java在当前的目录下 
-2.表示–proto_path= .\addressbook.proto proto的目录 ./代表当前的目录.
+	protoc –java_out=../ –proto_path= .\addressbook.proto
+
+	1,其中–java_out=../ 表示输出java在当前的目录下 
+
+	2.表示–proto_path= .\addressbook.proto proto的目录 ./代表当前的目录.
+
+
+
+5.assets 文件夹下的  addressbook.proto 是个demo
+
+
+6.最后生成的使用的指令 ,给自己以后参考
+>E:\workspace\3\Protocoltest\assets>protoc -I=E:\workspace\3\Protocoltest\assets
+--java_out=../ E:\workspace\3\Protocoltest\assets\person.proto
+
+E:\workspace\3\Protocoltest\assets>protoc -I=E:\workspace\3\Protocoltest\assets
+--java_out=../src E:\workspace\3\Protocoltest\assets\result.proto
+
+
+[参考](http://blog.csdn.net/agoodcoolman/article/details/51519799)

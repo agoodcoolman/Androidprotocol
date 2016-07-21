@@ -1,0 +1,15 @@
+package tutorial;
+option java_package = "com.proto.demo";
+option java_outer_classname = "Result";
+message result {
+	// 结果吗
+	required uint64 resultcode = 1;
+	// 提示信息
+	optional string alertMessage = 2;
+	// 错误吗
+	optional uint64 errorCode = 3;
+	// 错误信息提示
+	optional string errorMessage = 4;
+	// 返回的结果信息,
+	optional string jsonInfo = 5;
+}
