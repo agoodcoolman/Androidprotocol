@@ -6,7 +6,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.CharsetEncoder;
+
+import okio.BufferedSink;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 
 import com.example.tutorial.AddressBookProtos;
 import com.example.tutorial.AddressBookProtos.AddressBook;
@@ -16,8 +23,10 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.HttpHandler;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.ResponseStream;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 import com.lidroid.xutils.http.client.entity.FileUploadEntity;
@@ -32,6 +41,14 @@ import com.lidroid.xutils.util.MimeTypeUtils;
 import com.proto.demo.PersonInfo;
 import com.proto.demo.PersonInfo.Facephoto;
 import com.proto.demo.Result.result;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Headers;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.MultipartBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -77,9 +94,39 @@ public class MainActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
+		MediaType mediatype = MediaType.parse("application/octet-stream; charset=utf-8");
+		OkHttpClient okHttpClient = new OkHttpClient();
+		RequestBody create = RequestBody.create(mediatype, personinfo.toByteArray());
+		RequestBody build = new MultipartBuilder().type(MultipartBuilder.FORM)
+		.addPart(Headers.of("Content-Disposition", "form-data; name=\"file\"; filename=\"file\""),
+				RequestBody.create(null, personinfo.toByteArray())).build();
+		Request request = new Request.Builder()
+		.url("http://192.168.1.5:8080/Auth2/protobuf.do?")
+		.post(build)
+		.build();
+		try {
+			okHttpClient.newCall(request).enqueue(new Callback() {
+				
+				@Override
+				public void onResponse(Response arg0) throws IOException {
+					// TODO Auto-generated method stub
+					result parseFrom = result.parseFrom(arg0.body().bytes());
+					System.out.println(parseFrom);
+				}
+				
+				@Override
+				public void onFailure(Request arg0, IOException arg1) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+//			Response response = okHttpClient.newCall(request).execute();
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		/*if(!file.exists()) {
 			file.mkdirs();
 		}
@@ -93,9 +140,9 @@ public class MainActivity extends ActionBarActivity {
 				e.printStackTrace();
 			}
 		}*/
-		HttpUtils httpUtils = new HttpUtils();
+		/*final HttpUtils httpUtils = new HttpUtils();
 //		FileBody fileBody = new FileBody(new File(externalStorageDirectory), MimeTypeUtils.getMimeType(externalStorageDirectory));
-		RequestParams requestParams = new RequestParams();
+		final RequestParams requestParams = new RequestParams();
 //		requestParams.addBodyParameter("file", file);
 		MultipartEntity multipartEntity = new MultipartEntity();
 		
@@ -105,16 +152,42 @@ public class MainActivity extends ActionBarActivity {
 //		multipartEntity.addPart("file", fileBody);
 		multipartEntity.addPart("file", byteArrayBody);
 		requestParams.setBodyEntity(multipartEntity);
-		httpUtils.send(HttpMethod.POST, "http://192.168.1.5:8080/Auth2/protobuf.do?", requestParams, new RequestCallBack<String>() {
+		
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+				try {
+					ResponseStream response = httpUtils.sendSync(HttpMethod.POST, "http://192.168.1.5:8080/Auth2/protobuf.do?", requestParams);
+					
+					InputStream stream = response.getBaseResponse().getEntity().getContent();
+					byte[] buffer = new byte[stream.available()];
+					stream.read(buffer);
+					System.out.println(result.parseFrom(buffer));
+					stream.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+			}).start();
+			*/
+		
+		/*
+		httpUtils.send(HttpMethod.POST, "http://192.168.1.5:8080/Auth2/protobuf.do?", requestParams, new RequestCallBack<byte[]>() {
 
 
 			@Override
-			public void onSuccess(ResponseInfo<String> arg0) {
+			public void onSuccess(ResponseInfo<byte[]> arg0) {
 				try {
-					String results= arg0.result;
-					result parseFrom = result.parseFrom(results.getBytes());
-					System.out.println(parseFrom.toString());
-				} catch (InvalidProtocolBufferException e) {
+					
+//					String results= arg0.result;
+//					byte[] bytes = results.getBytes("UTF8");
+					
+//					result parseFrom = result.parseFrom(results.getBytes());
+					System.out.println(arg0.result);
+					
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -127,5 +200,6 @@ public class MainActivity extends ActionBarActivity {
 				
 			}
 		});
+		*/
 	}
 }
