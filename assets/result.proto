@@ -1,9 +1,9 @@
 package tutorial;
-option java_package = "com.proto.demo";
-option java_outer_classname = "Result";
-message result {
+option java_package = "jin.com.protobuflib.model";
+option java_outer_classname = "ResultInfo";
+message Result {
 	// 结果吗
-	required int64 resultcode = 1;
+	required int64 resultcode = 1[default = 0];
 	// 提示信息
 	optional string alertMessage = 2;
 	// 错误吗

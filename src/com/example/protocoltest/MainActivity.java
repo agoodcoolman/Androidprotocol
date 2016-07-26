@@ -12,8 +12,11 @@ import java.nio.charset.CharsetEncoder;
 
 import okio.BufferedSink;
 
+import org.apache.http.Header;
+import org.apache.http.HeaderElement;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
 
 import com.example.tutorial.AddressBookProtos;
 import com.example.tutorial.AddressBookProtos.AddressBook;
@@ -94,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
 			e.printStackTrace();
 		}
 		
-		MediaType mediatype = MediaType.parse("application/octet-stream; charset=utf-8");
+		/*MediaType mediatype = MediaType.parse("application/octet-stream; charset=utf-8");
 		OkHttpClient okHttpClient = new OkHttpClient();
 		RequestBody create = RequestBody.create(mediatype, personinfo.toByteArray());
 		RequestBody build = new MultipartBuilder().type(MultipartBuilder.FORM)
@@ -103,9 +106,9 @@ public class MainActivity extends ActionBarActivity {
 		Request request = new Request.Builder()
 		.url("http://192.168.1.5:8080/Auth2/protobuf.do?")
 		.post(build)
-		.build();
+		.build();*/
 		try {
-			okHttpClient.newCall(request).enqueue(new Callback() {
+			/*okHttpClient.newCall(request).enqueue(new Callback() {
 				
 				@Override
 				public void onResponse(Response arg0) throws IOException {
@@ -119,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
 					// TODO Auto-generated method stub
 					
 				}
-			});
+			});*/
 //			Response response = okHttpClient.newCall(request).execute();
 			
 			
@@ -140,7 +143,7 @@ public class MainActivity extends ActionBarActivity {
 				e.printStackTrace();
 			}
 		}*/
-		/*final HttpUtils httpUtils = new HttpUtils();
+		final HttpUtils httpUtils = new HttpUtils();
 //		FileBody fileBody = new FileBody(new File(externalStorageDirectory), MimeTypeUtils.getMimeType(externalStorageDirectory));
 		final RequestParams requestParams = new RequestParams();
 //		requestParams.addBodyParameter("file", file);
@@ -149,29 +152,61 @@ public class MainActivity extends ActionBarActivity {
 //		FileBody fileBody = new FileBody(file2);
 		byte[] byteArray = personinfo.toByteArray();
 		ByteArrayBody byteArrayBody = new ByteArrayBody(byteArray, "file");
+		
+		
 //		multipartEntity.addPart("file", fileBody);
 		multipartEntity.addPart("file", byteArrayBody);
 		requestParams.setBodyEntity(multipartEntity);
-		
+		httpUtils.send(HttpMethod.POST, "http://192.168.1.5:8080/Auth2/protobuf.do?", requestParams, new RequestCallBack<String>() {
+
+			@Override
+			public void onFailure(HttpException arg0, String arg1) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<String> arg0) {
+				/*InputStream stream = arg0.response.getBaseResponse().getEntity().getContent();
+				byte[] buffer = new byte[stream.available()];
+				stream.read(buffer);
+				System.out.println(result.parseFrom(buffer));
+				stream.close();*/
+				
+				/*byte[] buffer = new byte[.available()];
+				stream.read(buffer);*/
+				try {
+					
+					System.out.println(result.parseFrom(arg0.result.getBytes()));
+				} catch (InvalidProtocolBufferException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+		});
 			new Thread(new Runnable() {
 				
 				@Override
 				public void run() {
 				try {
-					ResponseStream response = httpUtils.sendSync(HttpMethod.POST, "http://192.168.1.5:8080/Auth2/protobuf.do?", requestParams);
+					/*ResponseStream response = httpUtils.sendSync(HttpMethod.POST, "http://192.168.1.5:123/Auth2/protobuf.do?", requestParams);
 					
 					InputStream stream = response.getBaseResponse().getEntity().getContent();
 					byte[] buffer = new byte[stream.available()];
 					stream.read(buffer);
 					System.out.println(result.parseFrom(buffer));
-					stream.close();
+					stream.close();*/
+					
+					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				}
 			}).start();
-			*/
+			
 		
 		/*
 		httpUtils.send(HttpMethod.POST, "http://192.168.1.5:8080/Auth2/protobuf.do?", requestParams, new RequestCallBack<byte[]>() {
